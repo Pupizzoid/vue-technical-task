@@ -16,9 +16,9 @@ Object.defineProperty(window, 'LATEST_ARTICLES', {
 </script>
 
 <template>
-<div>
-  <h2>Latest Updates</h2>
-  <div class="latest-updates">
+<div class="latest-updates">
+  <h2 class="title">Latest Updates</h2>
+  <div class="latest-updates-content">
     <div class="link-area" v-if="articles.length">
       <ul>
         <ArticleItem
@@ -37,9 +37,16 @@ Object.defineProperty(window, 'LATEST_ARTICLES', {
 .latest-updates {
   width: 100%;
   max-width: 500px;
+  color: black;
+}
+
+.latest-updates-content {
   border: 1px solid grey;
   padding: 16px;
   box-sizing: border-box;
-  color: black;
+}
+
+.title {
+  text-align: center;
 }
 </style>
