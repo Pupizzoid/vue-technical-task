@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { computed } from 'vue';
-import type { IArticleProps } from '@/interfaces/Article.interface'
+import type { IArticleProps } from '@/interfaces/article.interface';
 
 const props = defineProps<IArticleProps>();
 

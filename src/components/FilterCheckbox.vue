@@ -1,6 +1,5 @@
 <script setup lang='ts'>
-
-import type ICheckbox from '@/interfaces/checkbox.interface'
+import type ICheckbox from '@/interfaces/checkbox.interface';
 
 const props = defineProps<ICheckbox>();
 
