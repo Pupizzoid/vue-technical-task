@@ -4,7 +4,7 @@ import LatestUpdates from '@/components/LatestUpdates.vue'
 </script>
 
 <template>
-<LatestUpdates />
+  <LatestUpdates />
 </template>
 
 <style scoped>

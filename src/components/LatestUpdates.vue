@@ -6,6 +6,9 @@ import type { IArticle } from '@/interfaces/article.interface';
 import FilterCheckbox from '@/components/FilterCheckbox.vue';
 import { CheckboxEnum } from '@/enums/filter-checkbox.enum';
 import type ILatestUpdatesProps from '@/interfaces/latest-updates.interface';
+import { filterByCategory } from '@/utils/filter-by-category.utils';
+import { filterByDate } from '@/utils/filter-by-date.utils';
+import { sortByDate } from '@/utils/sort-by-date.utils';
 
 const LATEST_ARTICLES = 'LATEST_ARTICLES';
 
@@ -43,38 +46,10 @@ const updateValue = (value: boolean, typeOfFilter: string) => {
   }
 }
 
-const filterByDate = (articles: IArticle[]) => {
-  const today = new Date();
-  const sevenDaysAgo = new Date(today);
-  sevenDaysAgo.setDate(today.getDate() - 7);
-
-  return articles.filter((article: IArticle) => {
-    const publishDate = new Date(article.publishDate);
-    return publishDate >= sevenDaysAgo;
-  })
-};
-
-const sortByDate = (articles: IArticle[]) => {
-  return articles.sort((a: IArticle, b: IArticle) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-};
-
-const filterByCategory = (articles: IArticle[]) => {
-  if((filters.value.news && filters.value.essay) || (!filters.value.news && !filters.value.essay)) {
-    return articles;
-  }
-
-    return articles.filter((article: IArticle) => {
-    return (
-        (filters.value.news && article.category === 'news') ||
-        (filters.value.essay && article.category === 'essay')
-    );
-  });
-}
-
 const filteredArticles = computed(() => {
-  let filtered = filterByDate(articles.value);
-  filtered = filterByCategory(filtered);
-  return sortByDate(filtered).slice(0, maxItems);
+  let filtered = filterByDate(articles.value, (article: IArticle) => new Date(article.publishDate), new Date(), 7);
+  filtered = filterByCategory(filtered, (article: IArticle) => article.category, filters.value);
+  return sortByDate(filtered, (article: IArticle) => new Date(article.publishDate)).slice(0, maxItems);
 })
 </script>
 
