@@ -1,16 +1,22 @@
 <script setup lang='ts'>
-const props = defineProps({
-  article: {type: Object, required: true }
-});
+import { computed } from 'vue';
+import type { IArticleProps } from '@/interfaces/Article.interface'
+
+const props = defineProps<IArticleProps>();
 
 const { article } = props;
+
+const formattedDate = computed(() => {
+  const date = new Date(article.publishDate);
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+});
 </script>
 
 <template>
 <li>
   <a :href="article.url" target="_blank" class="item">
     <span class="title">{{ article.title }}</span>
-    <span class="date">{{ article.publishDate }}</span>
+    <span class="date">{{ formattedDate }}</span>
   </a>
 </li>
 </template>

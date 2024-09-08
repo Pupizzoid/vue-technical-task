@@ -1,8 +1,8 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
-import type IArticle from '@/interfaces/Article.interface'
 import ArticleItem from '@/components/ArticleItem.vue'
 import { MOCK_DATA } from '@/mock-data'
+import type { IArticle } from '@/interfaces/Article.interface'
 
 const articles = ref<IArticle[]>((window as any).LATEST_ARTICLES || MOCK_DATA);
 Object.defineProperty(window, 'LATEST_ARTICLES', {
