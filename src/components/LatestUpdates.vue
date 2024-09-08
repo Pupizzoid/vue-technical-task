@@ -2,8 +2,9 @@
 import { ref } from 'vue'
 import type IArticle from '@/interfaces/Article.interface'
 import ArticleItem from '@/components/ArticleItem.vue'
+import { MOCK_DATA } from '@/mock-data'
 
-const articles = ref<IArticle[]>((window as any).LATEST_ARTICLES || []);
+const articles = ref<IArticle[]>((window as any).LATEST_ARTICLES || MOCK_DATA);
 Object.defineProperty(window, 'LATEST_ARTICLES', {
   get(): IArticle[] {
     return articles.value;
